@@ -1,0 +1,26 @@
+package com.leetcode.Date0823;
+
+// 求二叉树的最大深度
+
+class TreeNode{
+    public int val;
+    TreeNode left;
+    TreeNode right;
+
+    public TreeNode(int val){
+        this.val = val;
+    };
+
+}
+
+// 返回二叉树的最大深度
+public class MaxLength {
+    public int getDeepLength(TreeNode treeNode){
+        if (treeNode == null){
+            return 0;
+        }
+        int left = getDeepLength(treeNode.left);
+        int right = getDeepLength(treeNode.right);
+        return Math.max(left, right) + 1;
+    }
+}
