@@ -44,6 +44,8 @@ public class MyPattern {
             if (text[ti] == pattern[pi]){
                 rmatch(ti + 1, pi + 1, text, pattern);
             }
+            String s;
+
         }
     }
 
