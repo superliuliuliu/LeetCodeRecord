@@ -68,3 +68,51 @@ public class QueenN {
         System.out.println(new QueenN().solveNQueens(8));
     }
 }
+
+class test{
+    private int count;
+
+    // 暂存每行棋子的所在列
+    private int[] result;
+
+    public int totalNQueens(int n) {
+        count = 0;
+        result = new int[n];
+
+        if (n <= 0){
+            return count;
+        }
+        getQueenN(0, n, result);
+        return count;
+    }
+
+    // row代表第几行放置棋子
+    private void getQueenN(int row, int n, int[] result){
+        // 表明已经有一个满足的结果
+        if (row == n){
+            count++;
+        }
+        // row 小于n代表未满足
+        // 开始遍历找合适的解
+        for (int i = 0; i < n; i++){
+            // 判断将棋子放在i列是否合适
+            if (isOK(row, i, result)){
+                // 代表第row行棋子的位置在i列
+                result[row] = i;
+                getQueenN(row + 1, n, result);
+            }
+            // 不合适的话回溯
+        }
+    }
+
+    private boolean isOK(int row, int cal, int[] result){
+        // 遍历以前的满足的解 剔除不符合要求的
+        for (int i = 0; i < row; i++){
+            if (cal == result[i] || cal == result[i] + row - i|| cal == result[i] - row + i){
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
