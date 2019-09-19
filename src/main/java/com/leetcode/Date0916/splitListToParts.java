@@ -2,9 +2,11 @@ package com.leetcode.Date0916;
 
 
 import java.util.Arrays;
+import java.util.Stack;
 
 // leetcode 725分隔链表
 public class splitListToParts {
+    Stack<Integer> one = new Stack<>();
 
     class ListNode{
         int val;
