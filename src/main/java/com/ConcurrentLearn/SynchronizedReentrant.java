@@ -1,5 +1,7 @@
 package com.ConcurrentLearn;
 
+import lombok.extern.slf4j.Slf4j;
+
 // Synchronized 可重入性验证
 public class SynchronizedReentrant {
     int a = 0;

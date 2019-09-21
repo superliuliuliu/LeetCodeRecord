@@ -23,6 +23,11 @@ public class maxSubArray {
                 res = sum;
             }
         }
+        String x = "axs";
+        String b = x;
+        x.concat("s");
+
+
         return res;
     }
 }
