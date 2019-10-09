@@ -1,4 +1,4 @@
-package com.ConcurrentLearn;
+package com.concurrentlearn;
 
 // Synchornized 对象锁之同步代码块形式学习下
 public class SynchronizedObjectLockCodeBlocks implements Runnable {

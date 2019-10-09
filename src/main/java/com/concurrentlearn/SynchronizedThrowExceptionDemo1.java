@@ -1,4 +1,4 @@
-package com.ConcurrentLearn;
+package com.concurrentlearn;
 
 // 验证 线程执行出错 Synchronized方法是否会释放锁资源
 public class SynchronizedThrowExceptionDemo1 implements Runnable{

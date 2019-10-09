@@ -1,4 +1,4 @@
-package com.ConcurrentLearn;
+package com.concurrentlearn;
 
 // Synchronized关键字 实现类锁中的静态方法锁
 public class SynchronizedClassLockdemo1  implements Runnable{

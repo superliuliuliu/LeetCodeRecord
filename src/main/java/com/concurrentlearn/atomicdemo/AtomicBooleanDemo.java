@@ -1,16 +1,19 @@
-package com.ConcurrentLearn.AtomicDemo;
+package com.concurrentlearn.atomicdemo;
 
-import java.util.concurrent.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-// 线程计数同步类
-public class Demo1 {
+public class AtomicBooleanDemo {
+
     // 模拟200个线程同时执行
     private static int threadCount = 200;
     // 总共计数5000次
     private static int countTotal = 5000;
     // 计数的值
-    private static int  count = 0;
-
+    private static AtomicBoolean isHappened = new AtomicBoolean(false);
     public static void main(String[] args) throws InterruptedException {
         // 使用内存线程池
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -25,7 +28,7 @@ public class Demo1 {
                 public void run() {
                     try {
                         semaphore.acquire();
-                        add();
+                        test();
                         semaphore.release();
                         countDownLatch.countDown();
                     } catch (InterruptedException e) {
@@ -37,10 +40,12 @@ public class Demo1 {
         countDownLatch.await();
         // 释放线程池
         executorService.shutdown();
-        System.out.println("count:" + count);
+        System.out.println(isHappened.get());
     }
 
-    public static void add(){
-        count++;
+    private static void test(){
+        if(isHappened.compareAndSet(false, true)){
+            System.out.println("execute!");
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.ConcurrentLearn;
+package com.concurrentlearn;
 
 // Synchronized 对象锁之方法修饰符形式
 public class SynchronizedObjectLockMethod implements Runnable{
@@ -30,7 +30,7 @@ public class SynchronizedObjectLockMethod implements Runnable{
         t1.start();
         t2.start();
 
-        while(t1.isAlive()||t2.isAlive()){
+        while(t1.isAlive()|| t2.isAlive()){
 
         }
         System.out.print("线程执行完毕");

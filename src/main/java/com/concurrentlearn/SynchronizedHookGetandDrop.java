@@ -1,4 +1,4 @@
-package com.ConcurrentLearn;
+package com.concurrentlearn;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

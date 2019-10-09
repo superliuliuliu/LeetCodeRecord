@@ -1,19 +1,15 @@
-package com.ConcurrentLearn.AtomicDemo;
+package com.concurrentlearn.atomicdemo;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.*;
 
-// 基于Atomic类的计数操作
-public class AtomicCountDemo1 {
+// 线程计数同步类
+public class Demo1 {
     // 模拟200个线程同时执行
     private static int threadCount = 200;
     // 总共计数5000次
     private static int countTotal = 5000;
     // 计数的值
-    private static AtomicInteger count = new AtomicInteger(0);
+    private static int  count = 0;
 
     public static void main(String[] args) throws InterruptedException {
         // 使用内存线程池
@@ -45,6 +41,6 @@ public class AtomicCountDemo1 {
     }
 
     public static void add(){
-        count.incrementAndGet();
+        count++;
     }
 }

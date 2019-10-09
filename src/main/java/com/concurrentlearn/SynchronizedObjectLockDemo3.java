@@ -1,4 +1,4 @@
-package com.ConcurrentLearn;
+package com.concurrentlearn;
 
 // 测试多个线程同时访问 同步方法与非同步方法
 public class SynchronizedObjectLockDemo3 implements Runnable{
