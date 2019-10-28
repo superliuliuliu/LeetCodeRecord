@@ -44,4 +44,8 @@ public class fourSum {
         }
         return result;
     }
+
+     private void get(){
+
+     }
 }
