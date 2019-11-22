@@ -17,7 +17,7 @@ public class LRUCache<K, V> extends LinkedHashMap {
 
     public LRUCache(int size){
         // true 代表按照访问顺序来排列 最近访问时间最短的的元素放在链表头部 最近访问时间间隔最长的元素内放置链表尾部
-        // 0.75代表hashMap的填充度
+        // 0.75代表hashMap的填充因子的值
         // Math.ceil(double x)方法返回的是大于x的最小数 相当于向上取整
         super((int) Math.ceil(size/0.75) + 1,0.75f, true);
         CACHE_SIZE = size;
