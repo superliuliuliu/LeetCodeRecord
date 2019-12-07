@@ -8,7 +8,7 @@ package com.concurrentlearn.singleton;
  */
 public class Singleton2 {
 
-    public final static Singleton2 INSTANCE;
+    public static Singleton2 INSTANCE;
 
     static {
         INSTANCE = new Singleton2();

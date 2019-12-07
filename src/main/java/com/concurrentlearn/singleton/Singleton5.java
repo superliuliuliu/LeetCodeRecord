@@ -9,6 +9,16 @@ package com.concurrentlearn.singleton;
 public class Singleton5 {
     private static Singleton5 instance;
 
+    private static boolean flag = true;
+
+    private Singleton5(){
+        if (flag != false){
+            flag = false;
+        }else{
+            throw new RuntimeException("禁止反射破坏单例模式");
+        }
+    }
+
     public static Singleton5 getInstance(){
         if (instance == null){
             synchronized (Singleton5.class){
@@ -17,6 +27,10 @@ public class Singleton5 {
                 }
             }
         }
+        return instance;
+    }
+
+    private Singleton5 readResolve(){
         return instance;
     }
 }

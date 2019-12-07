@@ -9,6 +9,12 @@ package com.concurrentlearn.singleton;
 public class Singleton6 {
     private static volatile Singleton6 instance;
 
+    private Singleton6(){
+        if (instance == null){
+            throw new RuntimeException("禁止反射破坏单例模式");
+        }
+    }
+
     public static Singleton6 getInstance(){
         if (instance == null){
             synchronized (Singleton6.class){
