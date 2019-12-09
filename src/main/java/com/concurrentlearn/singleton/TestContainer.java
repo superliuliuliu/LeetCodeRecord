@@ -1,5 +1,7 @@
 package com.concurrentlearn.singleton;
 
+import java.util.Arrays;
+
 /**
  * @author liugaoyang
  * @version 1.0.0
@@ -13,6 +15,13 @@ public class TestContainer {
         t1.start();
         t2.start();
         System.out.println("main program and");
+        Integer a = 127;
+        Integer b = 127;
+        Long c = Long.valueOf(300);
+        Long d = Long.valueOf(300);
+        System.out.println(a == b);
+        System.out.println(c == d);
+
 
     }
 }
