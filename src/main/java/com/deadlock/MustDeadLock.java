@@ -17,51 +17,51 @@ public class MustDeadLock {
 
 
     public static void main(String[] args) {
-        CyclicBarrier cyclicBarrier = new CyclicBarrier(2, new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("两个线程开始同时抢占锁资源");
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(2, () -> System.out.println("两个线程开始同时抢占锁资源"));
+        new Thread(() -> {
+            try {
+                cyclicBarrier.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (BrokenBarrierException e) {
+                e.printStackTrace();
             }
-        });
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+            synchronized (lock1){
+                System.out.println(Thread.currentThread().getName() + "获取资源lock1");
                 try {
-                    cyclicBarrier.await();
+                    Thread.sleep(200);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                } catch (BrokenBarrierException e) {
+                }
+                synchronized (lock2){
+                    System.out.println(Thread.currentThread().getName() + "获取资源lock2");
+                }
+            }
+        }).start();
+
+        new Thread(() -> {
+            try {
+                cyclicBarrier.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (BrokenBarrierException e) {
+                e.printStackTrace();
+            }
+
+            synchronized (lock2){
+                System.out.println(Thread.currentThread().getName() + "获取资源lock2");
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 synchronized (lock1){
                     System.out.println(Thread.currentThread().getName() + "获取资源lock1");
-                    synchronized (lock2){
-                        System.out.println(Thread.currentThread().getName() + "获取资源lock1");
-                    }
                 }
             }
         }).start();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    cyclicBarrier.await();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (BrokenBarrierException e) {
-                    e.printStackTrace();
-                }
-
-                synchronized (lock2){
-                    System.out.println(Thread.currentThread().getName() + "获取资源lock2");
-                    synchronized (lock1){
-                        System.out.println(Thread.currentThread().getName() + "获取资源lock1");
-                    }
-                }
-            }
-        }).start();
-
+        System.out.println("主程序执行完毕");
 
     }
 }
