@@ -40,9 +40,9 @@ class MyThreadFactory implements ThreadFactory{
 public class ThreadPoolWithName {
     // 创建一个线程池
     public static void main(String[] args) {
-        BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<>(5);
+        BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<>(2);
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
-                10,
+                1,
                 20,
                 10,
                 TimeUnit.SECONDS,
@@ -50,13 +50,26 @@ public class ThreadPoolWithName {
                 new MyThreadFactory(),
                 new ThreadPoolExecutor.CallerRunsPolicy());
         Runnable task1 = ()->{
+            try {
+                Thread.currentThread().sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println("线程名称为："+Thread.currentThread().getName());
         };
         Runnable task2 = ()->{
+//            try {
+//                //Thread.currentThread().sleep(200);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
             System.out.println("线程名称为："+Thread.currentThread().getName());
         };
         threadPoolExecutor.execute(task1);
         threadPoolExecutor.execute(task2);
+        threadPoolExecutor.execute(task2);
+        threadPoolExecutor.execute(task2);
+
         threadPoolExecutor.shutdown();
 
     }
