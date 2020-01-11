@@ -1,4 +1,4 @@
-package com.concurrentlearn.AQSExample;
+package com.concurrentlearn.AQSexample;
 
 import java.util.List;
 import java.util.Vector;

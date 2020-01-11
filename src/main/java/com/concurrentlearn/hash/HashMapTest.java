@@ -1,4 +1,4 @@
-package com.concurrentlearn.Hash;
+package com.concurrentlearn.hash;
 
 import java.util.HashMap;
 
