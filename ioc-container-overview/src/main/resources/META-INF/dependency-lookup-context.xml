@@ -1,19 +1,19 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="user" class="com.liugaoyang.xin.spring.ioc.overview.domain.User">
-        <property name="id" value="1"/>
-        <property name="name" value="刘高阳"/>
-    </bean>
+<bean id="user" class="com.liugaoyang.xin.spring.ioc.overview.domain.User">
+    <property name="id" value="1"/>
+    <property name="name" value="刘高阳"/>
+</bean>
 
-    <bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
-        <property name="targetBeanName" value="user" />
-    </bean>
+<bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+    <property name="targetBeanName" value="user" />
+</bean>
 
-    <!--primary指定是主要的-->
-    <bean id="superUser" class="com.liugaoyang.xin.spring.ioc.overview.domain.SuperUser" parent="user" primary="true">
-        <property name="address" value="平顶山"></property>
-    </bean>
+<!--primary指定是主要的-->
+<bean id="superUser" class="com.liugaoyang.xin.spring.ioc.overview.domain.SuperUser" parent="user" primary="true">
+    <property name="address" value="平顶山"></property>
+</bean>
 
 </beans>

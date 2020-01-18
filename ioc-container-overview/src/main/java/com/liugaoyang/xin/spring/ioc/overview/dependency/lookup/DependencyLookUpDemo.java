@@ -1,7 +1,6 @@
 package com.liugaoyang.xin.spring.ioc.overview.dependency.lookup;
 
 import com.liugaoyang.xin.spring.ioc.overview.annotation.Super;
-import com.liugaoyang.xin.spring.ioc.overview.domain.SuperUser;
 import com.liugaoyang.xin.spring.ioc.overview.domain.User;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
