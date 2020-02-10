@@ -6,7 +6,7 @@ package com.imooc.algorithm.array;
  * @description 封装数组
  * @date 2020/2/7 22:52
  */
-public class MyArray {
+public class MyArray<E> {
 
     //数组元素数目
     private int size;
@@ -14,7 +14,7 @@ public class MyArray {
     // 容量
     private int capacity;
 
-    private int[] data;
+    private E[] data;
 
     /**
      * MyArray
@@ -25,7 +25,7 @@ public class MyArray {
      */
     public MyArray(int capacity) {
         this.capacity = capacity;
-        this.data = new int[capacity];
+        this.data = (E[]) new Object[capacity];
         this.size = 0;
     }
 
@@ -43,7 +43,7 @@ public class MyArray {
     }
 
     // 向数组中添加元素
-    public void addLast(int item){
+    public void addLast(E item){
         if (size == capacity){
             throw new IllegalArgumentException("数组已满");
         }
@@ -51,14 +51,14 @@ public class MyArray {
     }
 
     // 向指定位置插入元素  需要移动相关元素
-    public void insertItem(int index, int item){
+    public void insertItem(int index, E item){
         if (size == capacity){
             throw new IllegalArgumentException("数组已满");
         }
         if (index < 0 || index > size){
             throw new IllegalArgumentException("坐标异常");
         }
-        for(int i = size; i > index; i--){
+        for (int i = size; i > index; i--){
             data[i] = data[i-1];
         }
         data[index] = item;
@@ -66,12 +66,12 @@ public class MyArray {
     }
 
     // 在数组头部添加一个元素
-    public void addFirst(int item){
+    public void addFirst(E item){
         insertItem(0, item);
     }
 
     // 查询元素
-    public int get(int index){
+    public E get(int index){
         if (index < 0 || index >= size){
             throw new IllegalArgumentException("坐标异常");
         }
@@ -79,7 +79,7 @@ public class MyArray {
     }
 
     // 修改元素
-    public void modify(int index, int item){
+    public void modify(int index, E item){
         if (index < 0 || index >= size){
             throw new IllegalArgumentException("坐标异常");
         }
@@ -92,9 +92,9 @@ public class MyArray {
     }
 
     // 数组是否包含某个元素
-    public boolean contains(int item){
+    public boolean contains(E item){
         for (int i = 0; i < size; i++){
-            if (data[i] == item){
+            if (data[i].equals(item)){
                 return true;
             }
         }
@@ -102,16 +102,16 @@ public class MyArray {
     }
 
     // 找到数组对应的下标
-    public int find(int item){
+    public int find(E item){
         for (int i = 0; i < size; i++){
-            if (data[i] == item){
+            if (data[i].equals(item)){
                 return i;
             }
         }
         return -1;
     }
 
-    public void deleteElement(int item){
+    public void deleteElement(E item){
         int index = find(item);
         if (index != -1){
             delete(index);
@@ -119,16 +119,17 @@ public class MyArray {
     }
 
     // 删除index下标的元素 返回为删除元素的值
-    public int delete(int index){
+    public E delete(int index){
         if (index < 0 || index >= size){
             throw new IllegalArgumentException("坐标异常");
         }
-        int res = data[index];
+        E res = data[index];
         // 删除元素后需要前移其后的元素
         for(int i = index; i < size - 1; i++){
             data[i] = data[i + 1];
         }
         size--;
+        data[size] = null;// help gc
         return res;
     }
 
@@ -148,7 +149,7 @@ public class MyArray {
     }
 
     public static void main(String[] args) {
-        MyArray myArray = new MyArray();
+        MyArray<Integer> myArray = new MyArray<>();
         myArray.addFirst(10);
         myArray.addFirst(100);
         myArray.insertItem(2, 200);
