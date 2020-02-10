@@ -14,5 +14,6 @@ public class HashMapTest {
         for (int i = 0; i < 14; i++){
             map.put("test"+ i, "test" + i);
         }
+
     }
 }
