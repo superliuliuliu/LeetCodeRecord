@@ -1,10 +1,9 @@
 package com.concurrentlearn.prodconmodel;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.Stack;
 
 // 使用 wait/notify机制来实现打印0-100的目标
-public class print100WithSignal {
+public class Print100WithSignal {
 
     private static int num = 0;
     private static final Object lock = new Object();

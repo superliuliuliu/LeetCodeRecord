@@ -1,5 +1,6 @@
 package com.imooc.algorithm.array;
 
+
 /**
  * @author liugaoyang
  * @version 1.0.0
@@ -7,6 +8,13 @@ package com.imooc.algorithm.array;
  * @date 2020/2/7 22:52
  */
 public class MyArray<E> {
+
+    /**
+     * 版本2 支持动态扩容
+     * 支持动态扩容需要考虑两个问题
+     * 1.扩容的倍数
+     * 2.数据的复制与释放问题
+     */
 
     //数组元素数目
     private int size;
@@ -44,19 +52,27 @@ public class MyArray<E> {
 
     // 向数组中添加元素
     public void addLast(E item){
-        if (size == capacity){
-            throw new IllegalArgumentException("数组已满");
+        insertItem(this.size, item);
+    }
+
+    // 数组扩容操作
+    private void reSize(int size){
+        E[] newData = (E[]) new Object[capacity*2];
+        for (int i = 0;i<this.size; i++){
+            newData[i] = this.data[i];
         }
-        data[size++] = item;
+        this.data = newData;
+        this.capacity = capacity*2;
+        System.out.printf("执行扩容操作！");
     }
 
     // 向指定位置插入元素  需要移动相关元素
     public void insertItem(int index, E item){
         if (size == capacity){
-            throw new IllegalArgumentException("数组已满");
+            reSize(this.capacity * 2);
         }
         if (index < 0 || index > size){
-            throw new IllegalArgumentException("坐标异常");
+            throw new IllegalArgumentException("下标越界");
         }
         for (int i = size; i > index; i--){
             data[i] = data[i-1];
@@ -130,6 +146,10 @@ public class MyArray<E> {
         }
         size--;
         data[size] = null;// help gc
+        // 数组容量进行缩小
+        if (size < capacity/2){
+            reSize(capacity/2);
+        }
         return res;
     }
 
@@ -149,7 +169,7 @@ public class MyArray<E> {
     }
 
     public static void main(String[] args) {
-        MyArray<Integer> myArray = new MyArray<>();
+        MyArray<Integer> myArray = new MyArray<>(2);
         myArray.addFirst(10);
         myArray.addFirst(100);
         myArray.insertItem(2, 200);

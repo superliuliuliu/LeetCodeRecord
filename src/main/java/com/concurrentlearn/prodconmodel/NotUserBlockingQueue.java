@@ -4,13 +4,14 @@ import java.util.Date;
 import java.util.LinkedList;
 
 public class NotUserBlockingQueue {
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws InterruptedException {
         Storage storage = new Storage(10);
         Thread producer = new Thread(new Producer1(storage));
-        Thread consumer = new Thread(new Consumer1(storage));
         producer.start();
+        Thread.sleep(2000);
+        Thread consumer = new Thread(new Consumer1(storage));
         consumer.start();
-
     }
 }
 
@@ -70,10 +71,10 @@ class Storage {
         this.storage = new LinkedList<>();
     }
 
+
     public synchronized void put(){
         while (storage.size() == MAXSIZE){
             try {
-                // 等待队列不满
                 System.out.println("仓库已满无法生产");
                 wait();
             } catch (InterruptedException e) {
@@ -98,6 +99,8 @@ class Storage {
         System.out.println("消费者消费："+ storage.poll());
         // 通知生产者可以生产了
         notify();
-
     }
+
+
 }
+

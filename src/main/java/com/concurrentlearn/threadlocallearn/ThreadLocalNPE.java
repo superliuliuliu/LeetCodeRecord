@@ -13,7 +13,7 @@ public class ThreadLocalNPE {
         longThreadLocal.set(Thread.currentThread().getId());
     }
 
-    public long get(){
+    public Long get(){
         return longThreadLocal.get();
     }
 
